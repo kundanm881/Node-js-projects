@@ -9,9 +9,9 @@ const http = require('http');
 const app = express();
 const port = 3000;
 const server = http.createServer(app);
-const { Server } = require("socket.io");
-const { on } = require("events");
-const io = new Server(server);
+// const { Server } = require("socket.io");
+// const { on } = require("events");
+// const io = new Server(server);
 
 
 app.use(bodyParser.json());
@@ -60,7 +60,7 @@ server.listen(port, () => {
 // };
 
 app.get('/', (req, res) => {
-   res.send("Hello worl");
+   res.send("Hello world");
 });
 // app.use("/user", router);
 

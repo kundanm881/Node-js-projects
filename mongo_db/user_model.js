@@ -1,27 +1,27 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
-const uri = "mongodb://localhost:27017/";
-const appName = "localApp";
-
-
-
-const db = mongoose.connect(uri + appName)
-   .then(() => console.log('Connected to MongoDB'))
-   .catch(err => console.error('MongoDB connection error:', err));
+// const uri = "mongodb://localhost:27017/";
+// const appName = "localApp";
 
 
-// schema
-const userSchema = new mongoose.Schema({
-   userName: String,
-   email: String,
-   password: {
-      type: String,
-      select: false,
-   },
 
-}, { versionKey: false });
+// const db = mongoose.connect(uri + appName)
+//    .then(() => console.log('Connected to MongoDB'))
+//    .catch(err => console.error('MongoDB connection error:', err));
 
 
-const userModel = mongoose.model("users", userSchema);
+// // schema
+// const userSchema = new mongoose.Schema({
+//    userName: String,
+//    email: String,
+//    password: {
+//       type: String,
+//       select: false,
+//    },
 
-module.exports = userModel;
+// }, { versionKey: false });
+
+
+// const userModel = mongoose.model("users", userSchema);
+
+// module.exports = userModel;

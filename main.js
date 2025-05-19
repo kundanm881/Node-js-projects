@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const router = require("./routers/user_router");
+const router = require("./wab_server/routers/user_router");
 const http = require('http');
 
 

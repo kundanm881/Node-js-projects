@@ -1,47 +1,39 @@
-const express = require("express");
+const app = require("express")();
+const server = require('http').Server(app);
+const io = require("socket.io")(server);
+require('dotenv').config();
+
+// get mongo db
+require('./wab_server/mongo_db/db.js');
+
 const bodyParser = require("body-parser");
-const router = require("./wab_server/routers/user_router");
-const http = require('http');
 
+const userRoute = require("./wab_server/routers/user_router");
+const authRouter = require("./wab_server/routers/auth_router.js");
 
-
-
-const app = express();
-const port = express.port || 3000;
-const server = http.createServer(app);
-const { Server } = require("socket.io");
-const { on } = require("events");
-app.io = new Server(server);
-
-
+app.io = io;
 app.use(bodyParser.json());
 
-// console.log(io.Server);
-
-
-
-server.listen(port, () => {
+// start the server
+server.listen(process.env.PORT, () => {
    const address = server.address();
    console.log("Server Started on " + address.port);
 })
 
 
-app.io.on('connection', async (socket) => {
-   console.log('a user connected ' + socket.id);
+// app.io.on('connection', async (socket) => {
+//    console.log('a user connected ' + socket.id);
 
 
-   socket.on('disconnect', () => {
-      console.log('user disconnected ' + socket.id);
-   });
-});
+//    socket.on('disconnect', () => {
+//       console.log('user disconnected ' + socket.id);
+//    });
+// });
 
 
-app.get('/', (req, res) => {
-   const socket = app.io;
-   socket.emit("kd","hello world from users");
-   res.send("Hello world ");
-});
-app.use("/user", router);
+
+app.use('/auth', authRouter);
+app.use("/user", userRoute);
 
 
 

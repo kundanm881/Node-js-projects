@@ -1,18 +1,11 @@
 const mongoose = require('mongoose');
 
-const uri = "mongodb://localhost:27017/";
-const appName = "localApp";
-
-
-
-const db = mongoose.connect(uri + appName)
-   .then(() => console.log('Connected to MongoDB'))
-   .catch(err => console.error('MongoDB connection error:', err));
-
-
-// schema
-const userSchema = new mongoose.Schema({
-   userName: String,
+// USER MODEL
+const schema = new mongoose.Schema({
+   userName: { 
+      type: String, 
+      required: true,
+   },
    email: String,
    password: {
       type: String,
@@ -22,6 +15,6 @@ const userSchema = new mongoose.Schema({
 }, { versionKey: false });
 
 
-const userModel = mongoose.model("users", userSchema);
+const userModel = mongoose.model("users", schema);
 
 module.exports = userModel;
